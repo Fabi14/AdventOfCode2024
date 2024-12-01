@@ -5,7 +5,6 @@
 #include <ranges>
 #include <numeric>
 #include "Input.h"
-#include <blackbird/combinators.hpp>
 
 int main()
 {
@@ -24,16 +23,14 @@ int main()
     std::ranges::sort(listA);
     std::ranges::sort(listB);
 
-
-    std::vector<int> part01;
-    std::ranges::transform(listA, listB, std::back_inserter(part01), std::minus{});
-    auto abs = part01 | transform(combinators::_abs);
+    // ---------------- P A R T   O N E ------------------------------
+    auto abs =  zip_transform(std::minus{}, listA, listB) | transform(combinators::_abs);
     std::cout << std::reduce(abs.begin(), abs.end()) <<'\n';
 
-    std::vector<int> part02;
-    std::cout << std::reduce(listA.begin(), listA.end(),0ll, [listB](auto sum, auto a)
+    // ---------------- P A R T   T W O ------------------------------
+    std::cout << std::reduce(listA.begin(), listA.end(),0ll, [&listB](auto sum, auto id)
         {
-            return sum + a * std::ranges::count(listB, a);
+            return sum + id * std::ranges::count(listB, id);
         }) << '\n';
 }
 
