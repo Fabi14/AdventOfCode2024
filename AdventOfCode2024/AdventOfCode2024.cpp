@@ -24,8 +24,16 @@ int main()
     std::ranges::sort(listA);
     std::ranges::sort(listB);
 
-    std::ranges::transform(listA, listB, listA.begin(), std::minus{});
-    auto abs = listA | transform(combinators::_abs);
-    std::cout << std::abs(std::reduce(abs.begin(), abs.end()));
+
+    std::vector<int> part01;
+    std::ranges::transform(listA, listB, std::back_inserter(part01), std::minus{});
+    auto abs = part01 | transform(combinators::_abs);
+    std::cout << std::reduce(abs.begin(), abs.end()) <<'\n';
+
+    std::vector<int> part02;
+    std::cout << std::reduce(listA.begin(), listA.end(),0ll, [listB](auto sum, auto a)
+        {
+            return sum + a * std::ranges::count(listB, a);
+        }) << '\n';
 }
 
