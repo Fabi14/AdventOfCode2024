@@ -14,12 +14,12 @@ int main()
 
     std::vector<int> listA;
     std::vector<int> listB;
-    for (auto view : input | chunk(2))
+    for (auto pair : input | chunk(2))
     {
-        listA.emplace_back(view.front());
-        listB.emplace_back(view.back());
+        listA.emplace_back(pair.front());
+        listB.emplace_back(pair.back());
     }
-
+     
     std::ranges::sort(listA);
     std::ranges::sort(listB);
 
