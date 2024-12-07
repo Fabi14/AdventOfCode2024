@@ -1,9 +1,14 @@
-ReadInput ← ≡⍜(°□) (⊜⋕≠@ .) ⊜□≠@\n. &fras
+📋 ← &fras "input.txt"
+Parse ← ≡⍜(°□) (⊜⋕≠@ .) ⊜□≠@\n.
 
-SameSign ← =1+∩(=⧻⟜/+)⊃(=¯1)(=1)±
+SameSign ← ≠0/+⊂∩(/×)⊃(=¯1)(=1)±
+OneAndThree ← /×⊂⊃(≤3)(≥1)⌵
+TestLevel ← /×⊂⊃OneAndThree SameSign ≡/-◫2
 
-OneAndThree ← =⧻⟜/+⊂⊃(≤3)(≥1)⌵
+Variants ← ⊂⊙□≡(□▽≠0.) ×⊙(↯⧻)⊞≠.⇡⧻...
 
-TestLevel ← =2 + ⊃OneAndThree SameSign ≡/-◫2
+① ← /+≡(TestLevel°□)
+② ← /+≡(≠0/+≡(TestLevel°□)Variants°□) # TODO part 2
 
-/+≡(TestLevel°□) ReadInput "input.txt"
+① Parse 📋
+② Parse 📋
