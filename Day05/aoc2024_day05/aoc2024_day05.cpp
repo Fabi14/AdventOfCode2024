@@ -83,14 +83,14 @@ int main()
     }
 
     std::cout << sum << '\n';
-    int sum2{ 0 };
-    for (auto& u : incorrectlyOrderedUpdates)
-    {
-        std::ranges::partial_sort(u,u.begin()+u.size()/2+1, [&](int a, int b)
-            {
-                return std::ranges::find(rulesForFixing[a], b) != rulesForFixing[a].end();
-            });
-        sum2 += u[u.size() / 2];
-    }
-    std::cout << sum2;
+    std::cout << std::reduce(incorrectlyOrderedUpdates.begin(),  incorrectlyOrderedUpdates.end(), 0, 
+        [&](int sum, auto u)
+        {
+            std::ranges::partial_sort(u, u.begin() + u.size() / 2 + 1, [&](int a, int b)
+                {
+                    return std::ranges::find(rulesForFixing[a], b) != rulesForFixing[a].end();
+                });
+            sum += u[u.size() / 2];
+            return sum;
+        });
 }
